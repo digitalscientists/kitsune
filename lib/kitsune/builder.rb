@@ -201,7 +201,7 @@ module Kitsune
       @resource.kitsune_admin[type][:fields] ||= []
       [fields].flatten.each do |field|
         unless field.is_a?(Hash)
-          @resource.kitsune_admin[type][:fields] << field
+          @resource.kitsune_admin[type][:fields] << field unless @resource.kitsune_admin[type][:fields].include?(field)
         else
           @resource.kitsune_admin[type].merge!(field)
         end
