@@ -6,7 +6,7 @@ module Kitsune
           display :title, :layout, :parent_id, :url
           edit :title, :url, :body, :layout, :parent_id
           wysiwyg :body
-          select :layout, Proc.new {Dir.glob(File.join(RAILS_ROOT, 'app', 'views', 'layouts', '*.html.*')).map{|f| File.basename(f).split('.').first}}
+          select :layout, [Dir.glob(File.join(RAILS_ROOT, 'app', 'views', 'layouts', '*.html.*')).map{|f| File.basename(f).split('.').first}]
           
           on_new do |page|
             remove_faux_methods
