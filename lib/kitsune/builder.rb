@@ -2,7 +2,7 @@ module Kitsune
   class TypeError < StandardError; end
   class Builder
         
-    TYPES = [:check_box, :datetime_select, :password_field, :text_area, :text_field, :wysiwyg]
+    TYPES = [:check_box, :datetime_select, :password_field, :text_area, :text_field, :wysiwyg, :collection_select]
     def initialize(resource, &block)
       @resource = resource
       self.instance_eval &block
@@ -104,8 +104,12 @@ module Kitsune
       @resource.kitsune_admin[:multipart] = value
     end
     
-    def select(field, options)
-      add :select, field, {:options => options}
+    def select(field, choices, options = {}, html_options = {})
+      add :select, field, {:options => [choices, options, html_options]}
+    end
+    
+    def collection_select(field, collection, value_method, text_method, options = {}, html_options = {})
+      add :collection_select, field, {:options => [collection, value_method, text_method, options, html_options]}
     end
     
     def string(field)

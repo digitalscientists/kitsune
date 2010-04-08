@@ -233,8 +233,8 @@ module Kitsune
       
       field = column.name
       
-      if field_type(field) == :select
-        [field_options(field), {:include_blank => true}]
+      if field_type(field) == :select or field_type(field) == :collection_select
+        field_options(field)
       elsif column.name =~ /._id$/
         id = :id
         collection = find_association_class(column).all
