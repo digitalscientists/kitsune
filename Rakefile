@@ -9,9 +9,9 @@ begin
     g.name = 'kitsune'
     g.summary = %(Integrated Rails Content Management System.)
     g.description = %(Integrated Rails Content Management System.)
-    g.email = 'matt@toastyapps.com'
-    g.homepage = 'http://github.com/toastyapps/kitsune'
-    g.authors = %w(toastyapps <matt@toastyapps.com>)
+    g.email = 'matt@toastyapps.com, hemanth.pai@digitalscientists.com'
+    g.homepage = 'http://github.com/digitalscientists/kitsune'
+    g.authors = %w(toastyapps <matt@toastyapps.com>, hemanth.pai <hemanth.pai@digitalscientists.com>)
     g.requirements << "will_paginate"
     g.requirements << "haml"
     g.add_dependency('will_paginate', '~> 2.3.11')
