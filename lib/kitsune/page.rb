@@ -8,16 +8,22 @@ module Kitsune
           wysiwyg :body
           select :layout, Proc.new {Dir.glob(File.join(RAILS_ROOT, 'app', 'views', 'layouts', '*.html.*')).map{|f| File.basename(f).split('.').first}}
           
+          on_new do |page|
+            remove_faux_methods
+          end
+          
           on_edit do |page|
             Kitsune::Layout.new(Dir.glob(File.join(RAILS_ROOT, 'app', 'views', 'layouts', "#{page.layout}.html.*")).first).content_areas.each do |area|
               page.class.send(:define_method, area, Proc.new{ self.data ||= {}; self.data[:content_for] ||= {}; self.data[:content_for][area.to_sym]})
               edit area.to_sym => :text
+              add_faux_method area
             end
           end
           
           before_save do |page|
             Kitsune::Layout.new(Dir.glob(File.join(RAILS_ROOT, 'app', 'views', 'layouts', "#{page.layout}.html.*")).first).content_areas.each do |area|
               page.class.send(:define_method, "#{area}=", Proc.new{|value| self.data ||= {}; self.data[:content_for] ||= {}; self.data[:content_for][area.to_sym] = value})
+              add_faux_method "#{area}="
             end
           end
           
@@ -57,6 +63,7 @@ module Kitsune
           end
         rescue
         end
+        
       end
     end
   end

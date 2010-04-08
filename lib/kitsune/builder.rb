@@ -24,6 +24,10 @@ module Kitsune
       @resource.kitsune_admin[:on_edit] = block
     end
     
+    def on_new &block
+      @resource.kitsune_admin[:on_new] = block
+    end
+    
     def before_save &block
       @resource.kitsune_admin[:before_save] = block
     end
@@ -42,6 +46,23 @@ module Kitsune
 		  @resource.kitsune_admin[:versioned] = true
 	  end
 	  
+	  def add_faux_method method_name
+  	  @resource.kitsune_admin[:faux_methods] ||= []
+  	  @resource.kitsune_admin[:faux_methods]<<method_name
+    end
+    
+    def remove_faux_methods
+      if @resource.kitsune_admin[:faux_methods]
+        @resource.kitsune_admin[:faux_methods].each do |fm|
+          @resource.send(:remove_method, fm) if @resource.methods.include?(fm.to_sym)
+          if @resource.kitsune_admin[:edit][:fields]
+            @resource.kitsune_admin[:edit][:fields].delete fm.to_sym if @resource.kitsune_admin[:edit][:fields].include?(fm.to_sym)
+            @resource.kitsune_admin[:fields].delete fm.to_sym if @resource.kitsune_admin[:fields].keys.include?(fm)
+          end
+        end
+        @resource.kitsune_admin[:faux_methods].clear
+      end
+    end
 
     def no_admin
       @resource.kitsune_admin[:no_admin] = true

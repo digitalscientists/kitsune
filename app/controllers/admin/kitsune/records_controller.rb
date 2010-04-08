@@ -16,6 +16,7 @@ class Admin::Kitsune::RecordsController < Admin::Kitsune::KitsuneController
   
   def new
     @record = @model.new_record
+    @model.run_hooks(:on_new, @record)
   end
   
   def create
@@ -46,6 +47,7 @@ class Admin::Kitsune::RecordsController < Admin::Kitsune::KitsuneController
   end
   
   def edit
+    @model.run_hooks(:on_new, @record)
     @model.run_hooks(:on_edit, @record)
   end
   
