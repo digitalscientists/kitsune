@@ -10,7 +10,7 @@
 		<div style="float: left" class="title">{#kitsune_dlg.code_title}</div>
 
 		<div id="wrapline" style="float: right">
-			<input type="checkbox" name="wraped" id="wraped" onclick="toggleWordWrap(this);" class="wordWrapCode" /><label for="wraped">{#kitsune_dlg.code_wordwrap}</label>
+			<input type="checkbox" name="wraped" id="wraped" onclick="toggleWordWrap(this);" class="wordWrapCode" style="display:inline;width:auto"/><label for="wraped" style="display:inline;padding:4px 0 0 5px">{#kitsune_dlg.code_wordwrap}</label>
 		</div>
 
 		<br style="clear: both" />
@@ -19,12 +19,13 @@
 
 		<div class="mceActionPanel">
 			<div style="float: left">
-				<input type="submit" name="insert" value="{#update}" id="insert" />
+				<input type="submit" name="insert" value="Update" id="insert" />
 			</div>
 
 			<div style="float: right">
-				<input type="button" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" id="cancel" />
+				<input type="button" name="cancel" value="Cancel" onclick="tinyMCEPopup.close();" id="cancel" />
 			</div>
+			<br style="clear: both" />
 		</div>
 	</form>
 </body>
