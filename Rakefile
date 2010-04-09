@@ -6,7 +6,7 @@ require 'rake/rdoctask'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |g|
-    g.name = 'kitsune'
+    g.name = 'ds-kitsune'
     g.summary = %(Integrated Rails Content Management System.)
     g.description = %(Integrated Rails Content Management System.)
     g.email = 'matt@toastyapps.com, hemanth.pai@digitalscientists.com'
