@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kitsune}
-  s.version = "0.2.5"
+  s.version = "0.2.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["toastyapps", "<matt@toastyapps.com>,", "hemanth.pai", "<hemanth.pai@digitalscientists.com>"]
@@ -370,6 +370,7 @@ Gem::Specification.new do |s|
      "generators/kitsune_flat_files/templates/views/erb/admin/kitsune/records/new.html.erb",
      "generators/kitsune_flat_files/templates/views/erb/kitsune/show.html.erb",
      "generators/kitsune_flat_files/templates/views/erb/layouts/admin/kitsune.html.erb",
+     "kitsune.gemspec",
      "lib/kitsune.rb",
      "lib/kitsune/active_record.rb",
      "lib/kitsune/builder.rb",
