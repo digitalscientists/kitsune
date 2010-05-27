@@ -1,8 +1,6 @@
-h1. Kitsune
+h2. Kitsune: A drop in Rails CMS
 
-A drop in Rails CMS
-
-h2. Setup
+h3. Setup
 
 @$ gem install kitsune --source http://gems.github.com@
 
@@ -22,12 +20,12 @@ Then go to:
 http://localhost:3000/admin/kitsune
 Lo and behold, admin UI is automatically created for all models defined in the rails application.
 
-h2. Usage
+h3. Usage
 
 Cherry pick from the commands below to add functionality to the admin interface:
 @display, edit, display_and_edit, no_menu, name, category, order_by, disable,sortable, file, image, multipart, select, string, text, sit, no_edit@
 
-h2. Example Model
+h3. Example Model
 
 bc.. @class Product < ActiveRecord::Base
   has_and_belongs_to_many :product_categories
