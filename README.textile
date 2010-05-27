@@ -2,10 +2,16 @@ h1. Kitsune
 
 A drop in Rails CMS
 
-*This is still being developed and is currently barely useable*
+h2. Setup
 
+@$ gem install kitsune --source http://gems.github.com@
 
 @$ script/generate kitsune --include-page-model@
+
+Other options supported:
+@--without-page-model@ Exclude Page Model
+@--without-user-model@ Exclude User Model
+@--versioned@ Setup versioning for ActiveRecord, will need vestal_versions preinstalled
 
 @$ rake db:migrate@
 
@@ -14,3 +20,36 @@ A drop in Rails CMS
 
 Then go to:
 http://localhost:3000/admin/kitsune
+Lo and behold, admin UI is automatically created for all models defined in the rails application.
+
+h2. Usage
+
+Cherry pick from the commands below to add functionality to the admin interface:
+@display, edit, display_and_edit, no_menu, name, category, order_by, disable,sortable, file, image, multipart, select, string, text, sit, no_edit@
+
+h2. Example Model
+
+bc.. @class Product < ActiveRecord::Base
+  has_and_belongs_to_many :product_categories
+  has_many :product_photos
+  has_many :voltage_ratings
+
+  admin do
+    display_and_edit :short_name
+    edit :long_name, :product_category_ids, :description, :overview, :features, :order
+    wysiwyg :description
+    wysiwyg :overview
+    wysiwyg :features
+    collection_select :product_category_ids, ProductCategory.all, :id, :title, {:include_blank => true}, {:multiple => true}
+  end
+
+  def self.search_results(keywords)
+    Product.all(:conditions => ["(products.short_name like :search or products.long_name like :search or products.description like :search)", {:search => "%#{keywords}%"}])
+  end
+
+  def to_param
+    "#{id}-#{short_name.gsub(/[^a-z0-9]+/i, '-')}"
+  end
+end@
+
+p. And that is how you do it.
