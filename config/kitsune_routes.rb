@@ -12,7 +12,9 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   
-  Page.all.each do |page|
-    map.connect page.url, :controller => 'kitsune', :action => 'show', :url => page.url[1..-1].split('/')
-  end  
+	if defined?(Page)
+		Page.all.each do |page|
+			map.connect page.url, :controller => 'kitsune', :action => 'show', :url => page.url[1..-1].split('/')
+		end  
+	end
 end
